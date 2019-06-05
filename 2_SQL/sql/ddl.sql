@@ -28,13 +28,15 @@ commit; /* 확정 다른 곳에서 조회 가능 */
 delete from book; /* rollback */
 delete from book where title is null;
 
-alter table book add(price number(7)); /* 북테이블에 항목 추가 */
+alter table book add(price number(7)); /* 북테이블에 항목 추가 7자리*/ 
 
 insert into book values(5, default, default, default, default);
 update book set price  = null; /* 전체 업데이트 */
 update book set price  = 10, title ='jsp' where bookno = 1;
 
-alter table book modify(price number(7, 2));/* 해당 항목이 비워져(null) 이어야 변경 가능 */
+/* 기존 테이블의 속성을 변경하는 sql문 */				  
+alter table book modify(price number(7, 2));/* 해당 항목이 비워져(null) 이어야 변경 가능  */
+				     /* number(7, 2) 의미 : 총 7자리에 소수 2자리 */
 alter table book drop column price; /* 항목 삭제 */
 
 rename book to book2; /* table rename */
