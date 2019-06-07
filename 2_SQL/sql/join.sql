@@ -96,6 +96,12 @@ order by e.deptno;
 
 /* 평균 급여가 2000 이상인 부서 정보 출력 */
 /* 실행순서 from > where > group by > having > order by > select */
+/* 원하는 정보를 불러올 때의 알고리즘 : 
+      from(어떤 테이블에서~) where(조건으로 필터링 하고)
+      group by(원하는 항목으로 그룹화하는데) having(그룹화의 조건이 있다면) 데이터를 모아오고
+      order by(정렬이 필요하다면 기준을 정하고) select(데이터를 선택하여 보여준다.) */
+      /* join이 추가될시 from 뒤에 붙이고 on에 테이블을 조인하는 조건을 붙인다. */
+   
 select e.deptno, d.dname, avg(e.sal) 
 from emp e, dept d
 where e.deptno = d.deptno
