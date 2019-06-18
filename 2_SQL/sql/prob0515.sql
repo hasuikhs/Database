@@ -16,7 +16,7 @@ create table board(
 	cnt number(5) default 0,
 	id varchar2(10) constraint id_pk references users
 );
-
+// reference를 받는 테이블은 먼저 생성 될 수 없음, 테이블 생성에 
 create table 
 /*회원 등록 */
 insert into users values ('java', 'java01', 'kim', 'admin');
