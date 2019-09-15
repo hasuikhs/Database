@@ -11,4 +11,5 @@
 |     날짜표기      |               '%Y-%m-%d %H:%s'(년-월-일 시:분)               |                  'YYYY_MM_DD HH24:MI'                  |
 |     IF문 활용     |                IF(조건식, True 값, False 값)                 | DECODE(조건식, 일치해야하는 조건값, True 값, False 값) |
 |     다중 조건     | CASE         WHEN '비교할 조건1' THEN '반환할 값'         WHEN '비교할 조건2' THEN '반환할 값2'         ELSE '그밖의 조건으로 반환할 값'   END |                          같음                          |
+|   문자열 자르기   | SUBSTRING(문자열, 1, 10), LEFT(문자열, 3), RIGHT(문자열, 3)  |                 SUBSTR(문자열, 1, 10)                  |
 
