@@ -124,5 +124,6 @@ CREATE TABLE 테이블명(
   TRUNCATE table 테이블명;
   ```
 
-  
+
+
 
