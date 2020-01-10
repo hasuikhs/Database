@@ -69,6 +69,14 @@ CREATE TABLE 테이블명(
   |  PRIMARY KEY   |         기본키로 지정         |
   |    DEFAULT     |        기본 값을 설정         |
   |     UNIQUE     |           중복 불가           |
+  
+  - AUTO_INCREMENT 초기화
+  
+    - 순서가 비연속적이게되는 상황이 발생한다.
+  
+    ```mysql
+    ALTER TABLE 테이블명 AUTO_INCREMENT=시작값;
+    ```
 
 ### 2.2 조회
 
