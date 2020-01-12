@@ -1,48 +1,68 @@
 # 03_MySQL_DCL
 
-## 1. 접속 
+- DCL(Data Control Language)는 DataBase의 데이터를 제어하는 언어
+  - 데이터의 **보안, 무결성, 회복, 병행 수행체 등을 정의하는데 사용**한다.
 
-```bash
-$ mysql -u root -p
-```
+## 1. 사용자
 
-## 2. 사용자
-
-### 2.1 사용자 생성
+### 1.0 사용자 목록 확인
 
 ```mysql
-$ create user userid identified by "password";
-$ create user userid@localhost identified by "password";
+USE mysql;
+
+SELECT user FROM user;	# 사용자 ID 목록 간단 확인
 ```
 
-### 2.2 사용자 삭제
+### 1.1 사용자 생성
+
+- 로컬에서만 접속 가능한 사용자 생성
+
+  ```mysql
+  CREATE USER 'userid'@localhost IDENTIFIED BY 'password';
+  ```
+
+- 모든 호스트에서 접속 가능한 사용자 생성
+
+  ```mysql
+  CREATE USER 'userid'@% IDENTIFIED by 'password';
+  ```
+
+### 1.2 사용자 비밀번호 변경
 
 ```mysql
-$ drop user userid;
+SET PASSWORD FOR 'userid'@% = 'new password';
 ```
 
-### 2.3 권한 부여
+### 1.3 사용자 삭제
 
 ```mysql
-$ grant all on *.* to userid;
-
-$ grant all on DB이름.* to userid;
-
-$ grant all on DB이름.테이블명 to userid;
-
-$ grant select on DB이름.테이블명 to userid;
-
-$ grant update(컬럼1, 컬럼2) on DB이름.테이블명 to userid;
+DROP USER 'userid'@%;
 ```
 
-### 2.4 권한 삭제
+### 1.4 권한 부여
 
 ```mysql
-$ revoke all on DB이름.* from userid;
+GRANT ALL ON *.* TO userid;				 # 모든 DB의 모든 테이블 사용 권한
+
+GRANT ALL ON DB이름.* TO userid;			# 특정 DB의 모든 테이블 사용 권한
+
+GRANT ALL ON DB이름.테이블명 TO userid;	  # 특정 DB의 특정 테이블 사용 권한
 ```
 
-### 2.5 권한 확인하기
+- **권한을 부여하고 적용**해야한다.
+
+  ```mysql
+  FLUSH PRIVILEGES;
+  ```
+
+### 1.4 권한 삭제
 
 ```mysql
-$ show grants for userid;
+REVOKE ALL ON DB이름.* FROM userid;
+```
+
+### 1.5 권한 확인하기
+
+```mysql
+SHOW GRANTS FOR userid;
 ```
