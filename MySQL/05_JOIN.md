@@ -2,6 +2,8 @@
 
 > JOIN 연산은 여러 **테이블을 결합하는 연산**이다. 각 테이블은 각자에 맞는 데이터를 저장하고 있는데, 서로 다른 테이블에서 데이터를 가져오려면 JOIN 연산을 해야한다.
 
+![img](05_JOIN.assets/Visual_SQL_JOINS_V2.png)
+
 - people 테이블
 
   | name |    phone    | pid  |
@@ -23,6 +25,8 @@
 ## 1. Inner Join
 
 - Inner Join은 기본적으로 교집합이다.
+
+- 간략히 Join으로 나타내는데 ON 뒤는 조건을 지정할 수 있다.
 
   ```mysql
   SELECT name, phone, selling 
