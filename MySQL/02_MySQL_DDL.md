@@ -77,6 +77,32 @@ CREATE TABLE 테이블명(
     ```mysql
     ALTER TABLE 테이블명 AUTO_INCREMENT=시작값;
     ```
+  
+- 예시
+
+  - 부서 테이블 생성
+
+    ```mysql
+    CREATE TABLE `dept` (
+      `dept_no` int(11) unsigned NOT NULL,
+      `dept_name` varchar(32) NOT NULL,
+      PRIMARY KEY (`dept_no`)
+    ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+    ```
+
+  - 직원 테이블 생성
+
+    ```mysql
+    CREATE TABLE `emp` (
+      `emp_no` int(11) unsigned NOT NULL,
+      `dept_no` int(11) unsigned NOT NULL,
+      `emp_name` varchar(32) NOT NULL,
+      PRIMARY KEY  (`emp_no`),
+      FOREIGN KEY (`dept_no`) REFERENCES `dept` (`dept_no`)
+    ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+    ```
+
+    
 
 ### 2.2 조회
 
