@@ -42,13 +42,20 @@ DROP USER 'userid'@%;
 ### 1.4 권한 부여
 
 ```mysql
-GRANT ALL ON *.* TO userid;				 # 모든 DB의 모든 테이블 사용 권한
+GRANT ALL PRIVILEGES ON *.* TO 'userid'@'ip';	 	# 모든 DB의 모든 테이블 사용 권한
 
-GRANT ALL ON DB이름.* TO userid;			# 특정 DB의 모든 테이블 사용 권한
+GRANT ALL PRIVILEGES ON DB이름.* TO 'userid'@'ip';	# 특정 DB의 모든 테이블 사용 권한
 
-GRANT ALL ON DB이름.테이블명 TO userid;	  # 특정 DB의 특정 테이블 사용 권한
+GRANT ALL PRIVILEGES ON DB이름.테이블명 TO 'userid'@'ip';	  # 특정 DB의 특정 테이블 사용 권한
 ```
 
+- 권한 부여 오류 발생시
+
+  ```mysql
+  CREATE USER 'root'@'%' IDENTIFIED BY 'root';
+  GRANT ALL PRIVILEGES ON DB이름.테이블명 TO 'root'@'%' WITH GRANT OPTION;
+  ```
+  
 - **권한을 부여하고 적용**해야한다.
 
   ```mysql
