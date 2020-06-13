@@ -15,6 +15,10 @@
 - 동사는 능동태를 사용
 
   > _register_date_ (O) / _registered_date_ (X)
+  
+- Alias 할 때는 의미를 알 수 없는 문자를 사용하지 않음
+
+  > _table_name tn1_ (O) / _table_name1 A_ (X) 
 
 
 
