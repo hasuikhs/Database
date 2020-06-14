@@ -1,5 +1,7 @@
 # Database Naming Rule
 
+[참고](https://launchbylunch.com/posts/2014/Feb/16/sql-naming-conventions/)
+
 ## 1. 공통
 
 - 소문자를 사용
