@@ -5,7 +5,7 @@
 ### 1.1 생성
 
 ```mysql
-CREATE DATABASE DB이름 DEFAULT CHARACTER SET utf8 COLLATE utf-8_general_ci;
+CREATE DATABASE DB이름 DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
 ```
 
 ### 1.2 변경
