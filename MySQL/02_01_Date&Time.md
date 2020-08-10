@@ -85,3 +85,19 @@
 - MINUTE()
 - SECOND()
 - MICROSECOND()
+
+## 5. 날짜별 통계
+
+- 일별
+
+  ```mysql
+  SELECT count(*), date_format(stat_dt, '%d') FROM tb GROUP BY date_format(stat_dt, '%d');
+  ```
+
+- 월별
+
+  ```mysql
+  SELECT count(*), date_format(stat_dt, '%m') FROM tb GROUP BY date_format(stat_dt, '%m');
+  ```
+
+- 위처럼 `%Y`, `%m`, `%d`를 잘 섞어주면 연,월,일별 통계를 쉽게 구할 수 있음
