@@ -101,3 +101,15 @@
   ```
 
 - 위처럼 `%Y`, `%m`, `%d`를 잘 섞어주면 연,월,일별 통계를 쉽게 구할 수 있음
+
+- 날짜별 통계에서 주간 통계를 만들때는 0~52로 나타나 몇월몇일인지 알기가 쉽지 않음
+
+  ```mysql
+  SELECT CONCAT(DATE_FORMAT(DATE_SUB(날짜, INTERVAL (DAYOFWEEK(날짜) - 2) DAY), "%Y-%m-%d"), ' ~ ',
+  			  DATE_FORMAT(DATE_SUB(날짜, INTERVAL (DAYOFWEEK(날짜) - 8) DAY),"%Y-%m-%d")) `단위`,
+                DATE_FORMAT(날짜, '%Y-%U')
+  FROM 테이블
+  group by DATE_FORMAT(날짜, '%Y-%U');
+  ```
+
+  - 월요일이 주의 시작
