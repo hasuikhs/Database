@@ -1,5 +1,17 @@
 # Elasticsearh ?
 
+- Elasticsearch는 Apache Lucene 기반의 Java 오픈소스 분산 검색 엔진
+
+- 방대한 양의 데이터를 신속하게, 거의 실시간(NRT, Near Real Time)으로 저장, 검색, 분석 가능
+
+- Elasticsearch는 검색을 위해 단독으로 사용되기도 하며, **ELK( Elasticsearch / Logstash / Kibana ) Stack**으로 사용 가능
+
+  - Logstash : 다양한 소스(DB, CSV 파일 등)의 로그 또는 트랜젝션 데이터를 수집, 집계, 파싱하여 Elasticsearch로 전달
+  - Elasticsearch : Logstash로부터 받은 데이터를 검색 및 집계를 하여 필요한 관심 있는 정보를 획득
+  - Kibana : Elasticsearch의 빠른 검색을 통해 데이터를 시각화 및 모니터링
+
+  ![image-20200929233143673](README.assets/image-20200929233143673.png)
+
 ## 0. 비교
 
 | Elasticsearch | Relation DB |
