@@ -1,4 +1,4 @@
-# 02. Search
+# 02. Search(1)
 
 ## 1. match_all / match_none
 
@@ -127,5 +127,3 @@
   ```
 
   
-
-https://victorydntmd.tistory.com/315?category=742451
