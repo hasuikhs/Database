@@ -382,164 +382,163 @@
   	.aggregation(PipelineAggregatorBuilders
           .sumBucket("sum_avg_visit", "by_hour>avg_visit"))
   ;
-```
+  ```
   
-- sort기능과 검색기능을 추가하는데, 검색은 page_title 또는 page_url에서 같은 키워드로 검색한 데이터를 가져오면서, aggregation 된 pageview를 unique_pageview로 나눈값을 추가하고, pageview와 unique_pageview의 총 합을 구하라
-
+  - sort기능과 검색기능을 추가하는데, 검색은 page_title 또는 page_url에서 같은 키워드로 검색한 데이터를 가져오면서, aggregation 된 pageview를 unique_pageview로 나눈값을 추가하고, pageview와 unique_pageview의 총 합을 구하라
+  
   ```json
   {
-      "query": {
-          "bool": {
-              "filter": [
-                  {
-                      "terms": {
-                          "pfno": [
-                              "87896"
-                          ],
-                          "boost": 1.0
-                      }
-                  },
-                  {
-                      "range": {
-                          "statdate": {
-                              "from": "2020-08-31T15:00:00Z",
-                              "to": "2020-09-30T14:59:59Z",
-                              "include_lower": true,
-                              "include_upper": true,
-                              "boost": 1.0
-                          }
-                      }
-                  },
-                  {
-                      "bool": {
-                          "should": [
-                              {
-                                  "wildcard": {
-                                      "page_title": {
-                                          "wildcard": "*biz*",
-                                          "boost": 1.0
-                                      }
-                                  }
-                              },
-                              {
-                                  "wildcard": {
-                                      "page_url": {
-                                          "wildcard": "*biz*",
-                                          "boost": 1.0
-                                      }
-                                  }
-                              }
-                          ],
-                          "adjust_pure_negative": true,
-                          "boost": 1.0
-                      }
-                  }
-              ],
-              "adjust_pure_negative": true,
-              "boost": 1.0
-          }
-      },
-      "aggregations": {
-          "by_page": {
-              "terms": {
-                  "field": "page_url",
-                  "missing": 0,
-                  "size": 10,
-                  "min_doc_count": 1,
-                  "shard_min_doc_count": 0,
-                  "show_term_doc_count_error": false,
-                  "order": [
-                      {
-                          "_count": "desc"
-                      },
-                      {
-                          "_key": "asc"
-                      }
-                  ]
-              },
-              "aggregations": {
-                  "page_title": {
-                      "terms": {
-                          "field": "page_title",
-                          "missing": "",
-                          "size": 10,
-                          "min_doc_count": 1,
-                          "shard_min_doc_count": 0,
-                          "show_term_doc_count_error": false,
-                          "order": [
-                              {
-                                  "_count": "desc"
-                              },
-                              {
-                                  "_key": "asc"
-                              }
-                          ]
-                      }
-                  },
-                  "pageview": {
-                      "sum": {
-                          "field": "pageview",
-                          "missing": 0
-                      }
-                  },
-                  "unique_pageview": {
-                      "sum": {
-                          "field": "unique_pageview",
-                          "missing": 0
-                      }
-                  },
-                  "pageview_per_unique_pageview": {
-                      "bucket_script": {
-                          "buckets_path": {
-                              "unique_pageview": "unique_pageview",
-                              "pageview": "pageview"
-                          },
-                          "script": {
-                              "source": "params.pageview / params.unique_pageview",
-                              "lang": "painless"
-                          },
-                          "gap_policy": "skip"
-                      }
-                  },
-                  "sort": {
-                      "bucket_sort": {
-                          "sort": [
-                              {
-                                  "pageview": {
-                                      "order": "desc"
-                                  }
-                              }
-                          ],
-                          "from": 0,
-                          "gap_policy": "SKIP"
-                      }
-                  }
-              }
-          },
-          "sum_pageview": {
-              "sum_bucket": {
-                  "buckets_path": [
-                      "by_page>pageview"
-                  ],
-                  "gap_policy": "skip"
-              }
-          },
-          "sum_unique_pageview": {
-              "sum_bucket": {
-                  "buckets_path": [
-                      "by_page>unique_pageview"
-                  ],
-                  "gap_policy": "skip"
-              }
-          }
-      }
-  }
+  	"query": {
+      	"bool": {
+          	"filter": [
+              	{
+                  	"terms": {
+                      	"pfno": [
+                                "87896"
+                            ],
+                            "boost": 1.0
+                        }
+                    },
+                    {
+                        "range": {
+                            "statdate": {
+                                "from": "2020-08-31T15:00:00Z",
+                                "to": "2020-09-30T14:59:59Z",
+                                "include_lower": true,
+                                "include_upper": true,
+                                "boost": 1.0
+                            }
+                        }
+                    },
+                    {
+                        "bool": {
+                            "should": [
+                                {
+                                    "wildcard": {
+                                        "page_title": {
+                                            "wildcard": "*biz*",
+                                            "boost": 1.0
+                                        }
+                                    }
+                                },
+                                {
+                                    "wildcard": {
+                                        "page_url": {
+                                            "wildcard": "*biz*",
+                                            "boost": 1.0
+                                        }
+                                    }
+                                }
+                            ],
+                            "adjust_pure_negative": true,
+                            "boost": 1.0
+                        }
+                    }
+                ],
+                "adjust_pure_negative": true,
+                "boost": 1.0
+            }
+        },
+        "aggregations": {
+            "by_page": {
+                "terms": {
+                    "field": "page_url",
+                    "missing": 0,
+                    "size": 10,
+                    "min_doc_count": 1,
+                    "shard_min_doc_count": 0,
+                    "show_term_doc_count_error": false,
+                    "order": [
+                        {
+                            "_count": "desc"
+                        },
+                        {
+                            "_key": "asc"
+                        }
+                    ]
+                },
+                "aggregations": {
+                    "page_title": {
+                        "terms": {
+                            "field": "page_title",
+                            "missing": "",
+                            "size": 10,
+                            "min_doc_count": 1,
+                            "shard_min_doc_count": 0,
+                            "show_term_doc_count_error": false,
+                            "order": [
+                                {
+                                    "_count": "desc"
+                                },
+                                {
+                                    "_key": "asc"
+                                }
+                            ]
+                        }
+                    },
+                    "pageview": {
+                        "sum": {
+                            "field": "pageview",
+                            "missing": 0
+                        }
+                    },
+                    "unique_pageview": {
+                        "sum": {
+                            "field": "unique_pageview",
+                            "missing": 0
+                        }
+                    },
+                    "pageview_per_unique_pageview": {
+                        "bucket_script": {
+                            "buckets_path": {
+                                "unique_pageview": "unique_pageview",
+                                "pageview": "pageview"
+                            },
+                            "script": {
+                                "source": "params.pageview / params.unique_pageview",
+                                "lang": "painless"
+                            },
+                            "gap_policy": "skip"
+                        }
+                    },
+                    "sort": {
+                        "bucket_sort": {
+                            "sort": [
+                                {
+                                    "pageview": {
+                                        "order": "desc"
+                                    }
+                                }
+                            ],
+                            "from": 0,
+                            "gap_policy": "SKIP"
+                        }
+                    }
+                }
+            },
+            "sum_pageview": {
+                "sum_bucket": {
+                    "buckets_path": [
+                        "by_page>pageview"
+                    ],
+                    "gap_policy": "skip"
+                }
+            },
+            "sum_unique_pageview": {
+                "sum_bucket": {
+                    "buckets_path": [
+                        "by_page>unique_pageview"
+                    ],
+                    "gap_policy": "skip"
+                }
+            }
+        }
+    }
   ```
-
   - java code
 
   ```java
-  sourceBuilder
+sourceBuilder
   	.query(QueryBuilders
       	.boolQuery()
   		.filter(QueryBuilders
@@ -601,5 +600,7 @@
   ;
   ```
 
-  
+- bucketScript는 bucket을 대상으로 하는 쿼리이므로, 제일 상단의 aggregation의 계산을 할 수는 없다.
+
+  (위 코드에서는 55 ~ 59 줄의 aggregation의 나누기 등의 계산)
 
