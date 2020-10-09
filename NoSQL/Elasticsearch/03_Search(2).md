@@ -604,3 +604,5 @@ sourceBuilder
 
   (위 코드에서는 55 ~ 59 줄의 aggregation의 나누기 등의 계산)
 
+- java에서 Pipeline 계산된 값은 ParsedSimpleValue로 캐스팅해서 사용
+  - 값이 없을 경우 null 예외가 발생하므로 주의
