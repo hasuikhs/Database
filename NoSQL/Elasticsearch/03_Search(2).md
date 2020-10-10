@@ -604,5 +604,8 @@ sourceBuilder
 
   (위 코드에서는 55 ~ 59 줄의 aggregation의 나누기 등의 계산)
 
+  - bucketScript를 이용해서 나누기 등 계산시 분모가 0일 경우, 계산이 될 수 없지만 결과에는 null 값이 들어오게 되므로 결과 처리시 주의
+
 - java에서 Pipeline 계산된 값은 ParsedSimpleValue로 캐스팅해서 사용
+  
   - 값이 없을 경우 null 예외가 발생하므로 주의
