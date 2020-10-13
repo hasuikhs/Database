@@ -611,3 +611,6 @@ sourceBuilder
   - 값이 없을 경우 null 예외가 발생하므로 주의
   
 - java에서 동적으로 쿼리를 만들시 ParsedBucket을 받아 쓸 때 ParsedDateHistogram.ParsedBucket, ParsedTerms.ParsedBucket 등의 자료형으로 나눠질 수 있어 쿼리가 깔끔하지 않을 수도 있는데 그 상위 클래스인 ParsedMultiBucketAggregation.ParsedBucket으로 받아 사용 가능
+
+- 시간을 기준으로 aggregation할 때 키값에 시간대가 담기게 되는데 이 키값이 "0", "1", ..., "23" 이 문자열형식으로 들어가므로 sort가 원하는데로 되지 않으므로, 정렬은 서버 쪽에서 따로 해주도록 함
+
