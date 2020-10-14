@@ -614,3 +614,29 @@ sourceBuilder
 
 - 시간을 기준으로 aggregation할 때 키값에 시간대가 담기게 되는데 이 키값이 "0", "1", ..., "23" 이 문자열형식으로 들어가므로 sort가 원하는데로 되지 않으므로, 정렬은 서버 쪽에서 따로 해주도록 함
 
+- java코드에서 bucket들을 정렬해야할 때, 기본 필드를 정렬할 때와 Pipeline 계산된 필드의 이름을 기준으로 정렬을 할 때 차이가 있다.
+
+  ```java
+  // 기본 필드로 정렬할 때
+  // aggregation에서
+  .aggregation(AggregationBuilders
+      .terms("by_page")
+  	.field("page_url")
+      .order(BucketOrder.compound(
+          // pipline 계산 필드의 이름을 넣으면 검색 결과가 null로 반환
+         	BucketOrder.aggregation("field_name", true)	// true면 asc, false면 desc
+       ))
+  	.missing(0)
+               
+  // pipeline 집계된 필드까지 정렬할 때는
+  .subAggregation(PipelineAggregatorBuilders
+  	.bucketSort(
+          "sort",
+          new ArrayList<FieldSortBuilder>(){{
+              add(new FieldSortBuilder("field_name").order(SortOrder.DESC)) // asc는 SortOrder.ASC
+          }}
+      )
+  )
+  ```
+
+  
