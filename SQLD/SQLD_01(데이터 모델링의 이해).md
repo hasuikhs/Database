@@ -1,7 +1,5 @@
 # SQLD_01(데이터 모델링의 이해)
 
-http://www.dbguide.net/db.db?cmd=view&boardUid=148404&boardConfigUid=9&categoryUid=216&boardIdx=132&boardStep=1
-
 ### 1. 모델링의 이해
 
 #### 1.1 모델링의 정의
