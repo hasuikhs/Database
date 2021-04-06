@@ -12,7 +12,7 @@
 
   ```json
   {
-      "index_patterns": [ "logger_trend-*" ],
+      "index_patterns": [ "index_name-*" ],
       "settings" : {
           "number_of_shards" : 3,
           "number_of_replicas" : 2
@@ -35,6 +35,7 @@
   }
   ```
 
+
 ### 1.2 remove
 
 - **`DELETE` 방식**으로 `http://<host>:<port>/_template/<document_id>`
@@ -43,7 +44,9 @@
 
 ### 2.1 Insert
 
-- **`PUT` 방식**으로 `http://<host>:<port>/<index>/_doc/<id>`
+- **`PUT` 방식**으로 `http://<host>:<port>/<index>/<type>/<id>`
+- **`POST`** 방식으로 `http://<host>:<port>/<index>/<type>`
+  - POST 방식으로 넣을 때는 별도의 id를 입력하지 않아도, id를 난수값들로 만들어서 저장
 
 ### 2.2 Read
 
