@@ -287,7 +287,7 @@
           "by_hour": {
               "terms": {
                   "script": {
-                      "source": "Instant.ofEpochMilli(doc['statdate'].date.millis).atZone(ZoneId.of(params.tz)).hour",
+                      "source": "Instant.ofEpochMilli(doc['statdate'].value.toInstant().toEpochMilli()).atZone(ZoneId.of(params.tz)).hour",
                       "lang": "painless",
                       "params": {
                           "tz": "Asia/Seoul"
@@ -363,7 +363,7 @@
   			
   	.aggregation(AggregationBuilders
   		.terms("by_hour")
-  			.script(new Script(ScriptType.INLINE, "painless", "Instant.ofEpochMilli(doc['statdate'].date.millis).atZone(ZoneId.of(params.tz)).hour", params))
+  			.script(new Script(ScriptType.INLINE, "painless", "Instant.ofEpochMilli(doc['statdate'].value.toInstant().toEpochMilli()).atZone(ZoneId.of(params.tz)).hour", params))
               // 요일은 dayOfWeek로 변환
   			.minDocCount(0)
   					
