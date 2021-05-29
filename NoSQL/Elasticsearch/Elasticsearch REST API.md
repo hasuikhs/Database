@@ -35,6 +35,19 @@
   }
   ```
 
+- 7 버전 이후
+
+  ```json
+  {
+      // 위와 동일하지만 mapping에서 바로 properties로 넘어감
+      "mappings": {
+          "properties": {
+              "pfno": { "type": "keyword" },
+              // ...
+          }
+      }
+  }
+  ```
 
 ### 1.2 remove
 
@@ -47,6 +60,8 @@
 - **`PUT` 방식**으로 `http://<host>:<port>/<index>/<type>/<id>`
 - **`POST`** 방식으로 `http://<host>:<port>/<index>/<type>`
   - POST 방식으로 넣을 때는 별도의 id를 입력하지 않아도, id를 난수값들로 만들어서 저장
+  - 7버전 이후
+    - `http://<host>:<port>/index/_doc` 에 입력
 
 ### 2.2 Read
 

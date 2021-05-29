@@ -48,7 +48,7 @@
   ```bash
   $ javac -version
   
-  $ sudo apt-get install openjdk-1.8-jdk
+  $ sudo apt-get install openjdk-8-jdk
   ```
 
 - Elasticsearch GPG 공개키 import
@@ -71,6 +71,20 @@
   $ sudo apt-get update && sudo apt-get install elasticsearch
   ```
 
+- 설정 기본 위치: `/etc/elasticsearch/elasticsearch.yml`
+
+  ```bash
+  cluster.name: <cluster_name>
+  node.name: <node_name>
+  
+  network.host: <host_ip>
+  # 7버전 이상 추가
+  cluster.initial_master_nodes: <host_ip>
+  
+  path.data: /var/lib/elasticsearch
+  path.logs: /var/log/elasticsearch
+  ```
+
 - 실행
 
   ```bash
@@ -79,4 +93,24 @@
   $ systemctl start elasticsearch.service
   ```
 
+
+## 2.2 Kibana 설치
+
+- 설치
+
+  ```bash
+  $ apt-get install kibana
+  ```
+
+- 설정 기본 위치: `/etc/kibana/kibana.yml`
+
+  ```bash
+  server.host: <host_ip>
   
+  server.name: <host_ip>
+  
+  elasticsearch.hosts: ["http://<elasticsearch_ip>:<port>"]
+  ```
+
+  
+
