@@ -35,7 +35,7 @@
   }
   ```
 
-- 7 버전 이후
+  - 7 버전 이후
 
   ```json
   {
@@ -61,7 +61,17 @@
 - **`POST`** 방식으로 `http://<host>:<port>/<index>/<type>`
   - POST 방식으로 넣을 때는 별도의 id를 입력하지 않아도, id를 난수값들로 만들어서 저장
   - 7버전 이후
-    - `http://<host>:<port>/index/_doc` 에 입력
+    - `_doc`
+      - **`PUT`** `http://<host>:<port>/<index>/_doc/[_id값]`
+        - 가장 기본
+        - `_id` 값이 값으로 색인 후 해당 `_id` 값을 가진 문서가 있다면 덮어쓰기
+      - **`POST`** `http://<host>:<port>/<index>/_doc`
+        - ES에서 `_id` 값을 랜덤하게 지정하고, 항상 새로운 문서 생성
+    - `_create`
+      - 이 방식은 항상 새 문서를 생성하는 경우만 허용하고 문서를 덮어씌우면서 색인하는 것을 금지
+      - 이미 같은 `_id` 값을 가진 문서가 색인되어 있다면 실패가 발생
+      - **`PUT`** `http://<host>:<port>/<index>/_create/[_id값]`
+      - **`POST`** `http://<host>:<port>/<index>/_create/[_id값]`
 
 ### 2.2 Read
 
